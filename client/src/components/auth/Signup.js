@@ -25,7 +25,7 @@ export class Signup extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onClick = e => {
+  onSubmit = e => {
     e.preventDefault();
     this.props.signupUser(this.state, () => {
       this.props.history.push("/")
@@ -34,7 +34,7 @@ export class Signup extends Component {
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={ (e) => this.onSubmit(e)}>
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
           <Input
@@ -74,7 +74,10 @@ export class Signup extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth,
+  errors: state.errors
+});
 
 const mapDispatchToProps = {
   signupUser
