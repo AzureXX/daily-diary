@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 
 import { signupUser } from "../../actions/userActions";
+import { clearErrors } from "../../actions/errorActions";
 
 export class Signup extends Component {
   state = {
@@ -21,9 +22,11 @@ export class Signup extends Component {
     password2: ""
   };
   static propTypes = {
-    signupUser: PropTypes.func.isRequired
+    signupUser: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired
   };
   componentDidMount() {
+    this.props.clearErrors();
     if (this.props.isAuth) {
       this.props.history.push("/");
     }
@@ -99,7 +102,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  signupUser
+  signupUser,
+  clearErrors
 };
 
 export default connect(

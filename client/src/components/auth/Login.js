@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {withRouter} from "react-router-dom"
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Button, Form, FormGroup, Label, Input, FormFeedback } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormFeedback
+} from "reactstrap";
 import { loginUser } from "../../actions/userActions";
+import { clearErrors } from "../../actions/errorActions";
 
 export class Login extends Component {
   state = {
@@ -11,10 +19,12 @@ export class Login extends Component {
     password: ""
   };
   static propTypes = {
-    loginUser: PropTypes.func.isRequired
+    loginUser: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired
   };
 
   componentDidMount() {
+    this.props.clearErrors();
     if (this.props.isAuth) {
       this.props.history.push("/");
     }
@@ -27,13 +37,13 @@ export class Login extends Component {
   onSubmit = e => {
     e.preventDefault();
     this.props.loginUser(this.state, () => {
-      this.props.history.push("/")
+      this.props.history.push("/");
     });
   };
 
   render() {
     return (
-      <Form onSubmit={ (e) => this.onSubmit(e)}>
+      <Form onSubmit={e => this.onSubmit(e)}>
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
           <Input
@@ -76,7 +86,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  loginUser
+  loginUser,
+  clearErrors
 };
 
 export default connect(
