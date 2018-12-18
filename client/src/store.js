@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./reducers";
-
+import thunk from "redux-thunk";
 const initialState = {};
 
-const middleware = [];
+const middleware = [thunk];
 
 let store;
 if (window.navigator.userAgent.includes("Chrome")) {
