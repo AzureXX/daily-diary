@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 import { signupUser } from "../../actions/userActions";
@@ -14,14 +16,20 @@ export class Signup extends Component {
   static propTypes = {
     signupUser: PropTypes.func.isRequired
   };
-
+  componentDidMount() {
+    if (this.props.isAuth) {
+      this.props.history.push("/");
+    }
+  }
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onClick = e => {
     e.preventDefault();
-    this.props.signupUser(this.state)
+    this.props.signupUser(this.state, () => {
+      this.props.history.push("/")
+    })
   };
 
   render() {
@@ -75,4 +83,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Signup);
+)(withRouter(Signup));

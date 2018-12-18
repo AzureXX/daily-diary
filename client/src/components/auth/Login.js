@@ -14,13 +14,21 @@ export class Login extends Component {
     loginUser: PropTypes.func.isRequired
   };
 
+  componentDidMount() {
+    if (this.props.isAuth) {
+      this.props.history.push("/");
+    }
+  }
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onClick = e => {
     e.preventDefault();
-    this.props.loginUser(this.state);
+    this.props.loginUser(this.state, () => {
+      this.props.history.push("/")
+    });
   };
 
   render() {

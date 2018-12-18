@@ -16,6 +16,7 @@ export default (state = initialState, action) => {
     case USER_LOGOUT:
       return {
         ...state,
+        authUser: {},
         isAuth: false
       };
     default:
