@@ -7,6 +7,8 @@ import store from "./store";
 //Importing custom made components
 import NavBar from "./components/layout/NavBar";
 import Landing from "./components/landing/Landing";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup"
 class App extends Component {
   render() {
     return (
@@ -16,6 +18,8 @@ class App extends Component {
             <NavBar />
             <Switch>
               <Route exact path="/" component={Landing} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
             </Switch>
           </div>
         </Router>

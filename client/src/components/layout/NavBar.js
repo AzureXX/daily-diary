@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import {logoutUser} from "../../actions/userActions";
+import { logoutUser } from "../../actions/userActions";
 
 import {
   Collapse,
@@ -16,7 +16,9 @@ import {
 
 export class NavBar extends Component {
   static propTypes = {
-    auth: PropTypes.bool
+    history: PropTypes.object.isRequired,
+    logoutUser: PropTypes.func.isRequired,
+    isAuth: PropTypes.bool.isRequired
   };
 
   state = {
@@ -31,8 +33,8 @@ export class NavBar extends Component {
 
   onLogoutClick = () => {
     this.props.logoutUser();
-    this.props.history.push("/")
-  }
+    this.props.history.push("/");
+  };
   render() {
     return (
       <div>
@@ -50,9 +52,7 @@ export class NavBar extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink onClick={this.onLogoutClick}>
-                    Logout
-                  </NavLink>
+                  <NavLink onClick={this.onLogoutClick}>Logout</NavLink>
                 </NavItem>
               </Nav>
             ) : (
@@ -63,7 +63,7 @@ export class NavBar extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} to="/register">
+                  <NavLink tag={Link} to="/signup">
                     Create Account
                   </NavLink>
                 </NavItem>

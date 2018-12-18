@@ -9,7 +9,7 @@ export class Landing extends Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         Hello World
       </div>
     )
