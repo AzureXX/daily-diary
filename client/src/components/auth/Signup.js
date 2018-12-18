@@ -3,7 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormFeedback
+} from "reactstrap";
 
 import { signupUser } from "../../actions/userActions";
 
@@ -11,7 +18,7 @@ export class Signup extends Component {
   state = {
     email: "",
     password: "",
-    password2:""
+    password2: ""
   };
   static propTypes = {
     signupUser: PropTypes.func.isRequired
@@ -28,16 +35,17 @@ export class Signup extends Component {
   onSubmit = e => {
     e.preventDefault();
     this.props.signupUser(this.state, () => {
-      this.props.history.push("/")
-    })
+      this.props.history.push("/");
+    });
   };
 
   render() {
     return (
-      <Form onSubmit={ (e) => this.onSubmit(e)}>
+      <Form onSubmit={e => this.onSubmit(e)}>
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
           <Input
+            invalid={this.props.errors.email}
             onChange={this.onChange}
             value={this.state.email}
             type="email"
@@ -45,10 +53,14 @@ export class Signup extends Component {
             id="email"
             placeholder="example@site.com"
           />
+          {this.props.errors.email && (
+            <FormFeedback>{this.props.errors.email}</FormFeedback>
+          )}
         </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>
           <Input
+            invalid={this.props.errors.password}
             onChange={this.onChange}
             value={this.state.password}
             type="password"
@@ -56,10 +68,14 @@ export class Signup extends Component {
             id="password"
             placeholder="password"
           />
+          {this.props.errors.password && (
+            <FormFeedback>{this.props.errors.password}</FormFeedback>
+          )}
         </FormGroup>
         <FormGroup>
           <Label for="password2">Repeat Password</Label>
           <Input
+            invalid={this.props.errors.password2}
             onChange={this.onChange}
             value={this.state.password2}
             type="password"
@@ -67,6 +83,9 @@ export class Signup extends Component {
             id="password2"
             placeholder="repeat password"
           />
+          {this.props.errors.password2 && (
+            <FormFeedback>{this.props.errors.password2}</FormFeedback>
+          )}
         </FormGroup>
         <Button onClick={this.onClick}>Signup</Button>
       </Form>

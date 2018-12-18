@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {withRouter} from "react-router-dom"
 import { connect } from "react-redux";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, FormFeedback } from "reactstrap";
 import { loginUser } from "../../actions/userActions";
 
 export class Login extends Component {
@@ -37,6 +37,7 @@ export class Login extends Component {
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
           <Input
+            invalid={this.props.errors.email}
             onChange={this.onChange}
             value={this.state.email}
             type="email"
@@ -44,10 +45,14 @@ export class Login extends Component {
             id="exampleEmail"
             placeholder="example@site.com"
           />
+          {this.props.errors.email && (
+            <FormFeedback>{this.props.errors.email}</FormFeedback>
+          )}
         </FormGroup>
         <FormGroup>
           <Label for="examplePassword">Password</Label>
           <Input
+            invalid={this.props.errors.password}
             onChange={this.onChange}
             value={this.state.password}
             type="password"
@@ -55,6 +60,9 @@ export class Login extends Component {
             id="examplePassword"
             placeholder="password"
           />
+          {this.props.errors.password && (
+            <FormFeedback>{this.props.errors.password}</FormFeedback>
+          )}
         </FormGroup>
         <Button>Login</Button>
       </Form>
