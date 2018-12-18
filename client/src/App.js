@@ -9,6 +9,7 @@ import NavBar from "./components/layout/NavBar";
 import Landing from "./components/landing/Landing";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup"
+
 class App extends Component {
   render() {
     return (

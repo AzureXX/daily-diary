@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import {withRouter} from "react-router-dom"
 import { connect } from "react-redux";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { loginUser } from "../../actions/userActions";
 
 export class Login extends Component {
+  state = {
+    email: "",
+    password: ""
+  };
   static propTypes = {
-    prop: PropTypes
+    loginUser: PropTypes.func.isRequired
   };
 
   onChange = e => {
@@ -14,7 +20,7 @@ export class Login extends Component {
 
   onClick = e => {
     e.preventDefault();
-    console.log("signup");
+    this.props.loginUser(this.state);
   };
 
   render() {
@@ -23,6 +29,8 @@ export class Login extends Component {
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
           <Input
+            onChange={this.onChange}
+            value={this.state.email}
             type="email"
             name="email"
             id="exampleEmail"
@@ -32,6 +40,8 @@ export class Login extends Component {
         <FormGroup>
           <Label for="examplePassword">Password</Label>
           <Input
+            onChange={this.onChange}
+            value={this.state.password}
             type="password"
             name="password"
             id="examplePassword"
@@ -44,11 +54,15 @@ export class Login extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  loginUser
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(withRouter(Login));

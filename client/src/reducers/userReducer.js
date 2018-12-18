@@ -1,15 +1,16 @@
-import {USER_LOGOUT} from "../actions/types"
+import {USER_LOGOUT, SET_CURRENT_USER} from "../actions/types"
 
 const initialState = {
-  isAuth: true,
+  isAuth: false,
   authUser: {}
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "LOGIN":
+    case SET_CURRENT_USER:
       return {
         ...state,
+        authUser: action.payload,
         isAuth: true
       };
     case USER_LOGOUT:

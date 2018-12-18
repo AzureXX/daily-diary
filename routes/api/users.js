@@ -58,7 +58,7 @@ router.post("/login", (req, res) => {
   User.findOne({ email }).then(user => {
     if (!user) {
       errors.email = "User not found"
-      return res.json({errors});
+      return res.status(400).json({errors});
     }
 
     bcrypt.compare(password, user.password).then(isMatch => {
