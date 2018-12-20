@@ -32,6 +32,8 @@ router.get(
   (req, res) => {
     Post.findById(req.params.id)
       .then(post => {
+        if (!post) return res.status(404).json({ posts: "No such post exist" });
+
         if (post.user.toString() == req.user._id.toString())
           return res.json(post);
         else {

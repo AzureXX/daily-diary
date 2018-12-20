@@ -10,6 +10,8 @@ import { setCurrentUser, logoutUser } from "./actions/userActions";
 //Importing custom made components
 import NavBar from "./components/layout/NavBar";
 import Landing from "./components/landing/Landing";
+import Diary from "./components/diary/Diary";
+
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 
@@ -39,6 +41,7 @@ class App extends Component {
             <NavBar />
             <Switch>
               <Route exact path="/" component={Landing} />
+              <Route exact path="/diary" component={Diary} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
             </Switch>

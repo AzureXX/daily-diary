@@ -47,8 +47,8 @@ export class NavBar extends Component {
             {this.props.isAuth ? (
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink tag={Link} to="/profile">
-                    Profile
+                  <NavLink tag={Link} to="/diary">
+                    Diary
                   </NavLink>
                 </NavItem>
                 <NavItem>
