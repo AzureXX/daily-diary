@@ -35,8 +35,7 @@ router.get(
         if (post.user.toString() == req.user._id.toString())
           return res.json(post);
         else {
-          //Throw empty object for unknown reason
-          throw new Error("No access");
+          return res.status(404).json({ authorization: "No access" });
         }
       })
       .catch(err => res.status(404).json(err));
@@ -66,6 +65,7 @@ router.put(
   (req, res) => {
     Post.findById(req.params.id)
       .then(post => {
+        if (!post) return res.status(404).json({ posts: "No such post exist" });
         post.type = req.body.type;
         post.details = req.body.details || {};
         post.updatedAt = Date.now();
@@ -84,7 +84,7 @@ router.delete(
   (req, res) => {
     Post.findById(req.params.id)
       .then(post => {
-        if(!post) throw new Error("No such post exist")
+        if (!post) return res.status(404).json({ posts: "No such post exist" });
         if (post.user.toString() !== req.user.id) {
           return res
             .status(401)
