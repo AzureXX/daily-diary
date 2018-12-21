@@ -1,29 +1,27 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import moment from "moment"
+import React, { Component } from "react";
+//import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import DateSelector from "./DateSelector";
 export class Diary extends Component {
-  static propTypes = {
-    
-  }
-  componentDidMount = () => {
-    console.log(moment().format("DD,MM,YYYY"));
-  } 
+  static propTypes = {};
+  state = {
+    customDate: true
+  };
+  componentDidMount = () => {};
   render() {
     return (
-      <div>
-        
+      <div className="App">
+        <DateSelector />
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
-  
-})
+const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {
-  
-}
+const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Diary)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Diary);

@@ -1,5 +1,8 @@
 import {SWITCH_DATE} from "../actions/types"
-const initialState = {}
+
+const initialState = {
+
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
